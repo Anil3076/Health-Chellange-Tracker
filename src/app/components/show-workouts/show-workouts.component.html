@@ -1,0 +1,58 @@
+<div class="showworkouts flex flex-col gap-10">
+    <app-navbar></app-navbar>
+    <div class="workoutpanel flex flex-col w-4/5 h-1/2 self-center rounded-xl">
+        <div class="searchsec flex justify-around items-center mt-4">
+            <input [(ngModel)]="searchQuery" (input)="filterWorkouts()"  placeholder="Search" type="text" class=" search w-2/5 h-12">
+            <select [(ngModel)]="filterCatogary" (change)="filterWorkouts()" name="" id="" class="filter w-2/5 h-12">
+                <option value="All">All</option>
+                <option *ngFor="let workout of workouts">{{workout}}</option>
+            </select>
+        </div>
+        <div class="datatable self-center mt-5">
+            <table mat-table [dataSource]="wholeData" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef>User Name</th>
+                    <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Workouts">
+                    <th mat-header-cell *matHeaderCellDef>Workouts</th>
+                    <td mat-cell *matCellDef="let element"> {{element.Workouts}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="NumberofWorkouts">
+                    <th mat-header-cell *matHeaderCellDef>Number of Workouts</th>
+                    <td mat-cell *matCellDef="let element"> {{element.NumberofWorkouts}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="TotalWorkoutMinutes">
+                    <th mat-header-cell *matHeaderCellDef> Total Workout Minutes </th>
+                    <td mat-cell *matCellDef="let element"> {{element.TotalWorkoutMinutes}}</td>
+
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+        </div>
+
+
+
+        <div class="paginationbtn self-center flex justify-center items-center gap-3">
+            <div class="flex gap-1">
+                <span class="text-white">Items per page</span>
+                <select id="">
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <button class="bg-white w-20 h-9" (click)="previous()">Previous</button>
+            <span
+                class="pagenumber border-2 border-white text-white w-9  h-9 flex justify-center items-center">{{currentPage}}</span>
+            <button class="bg-white w-12 h-9" (click)="next()">Next</button>
+            <div class="datainfo text-white">{{from}} - {{from + wholeData.length}} of {{dataLength}}</div>
+        </div>
+    </div>
+</div>

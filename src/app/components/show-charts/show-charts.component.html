@@ -1,0 +1,18 @@
+
+<div class="showchart flex flex-col gap-20">
+    <app-navbar></app-navbar>
+    <div class="container  bg-white flex self-center items-center justify-around">
+        <div class="buttons w-52 ">
+            <div class="flex flex-col gap-3">
+                <button class="bg-gray-300" (click)="getUser(userbtn.name)" *ngFor="let userbtn of UserData" >{{userbtn.name}}</button>
+            </div>
+            
+        </div>
+        <div class="chartpanel self-center flex flex-col items-center gap-5">
+            <div class="text-4xl font-semibold mt-5">{{userName}}</div>
+            <div style="width: 700px"><canvas id="workoutchart"></canvas></div>
+    
+        </div>
+    </div>
+    
+</div>
